@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router'; // Para navegar entre rutas y tambien mandar patametros
+
 
 @Component({
   selector: 'app-tarjetas',
@@ -8,7 +10,17 @@ export class TarjetasComponent {
 
   @Input() items: any[] = [];
 
-  constructor() { }
+  constructor( private router: Router) { }
 
+  verArtista( item: any) {
 
+    let artistaId: string;
+    if (item.type === 'artist') {
+      artistaId = item.id;
+    } else {
+      artistaId = item.artists[0].id;
+    }
+
+    this.router.navigate(['/artist', artistaId]);
+  }
 }
